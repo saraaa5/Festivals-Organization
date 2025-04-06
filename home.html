@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Organizacija festivala</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wdth,wght@112.5,300&family=Montserrat&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/swiper-bundle.min.css">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <meta name="referrer" content="no-referrer"/>
+        <script type="module" src="js/loginsingup.js">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+              apiKey: "AIzaSyC8ZJg8zdHDPnAsM2CkwErZ_yEStSFyyfg",
+              authDomain: "festivalskaorganizacija.firebaseapp.com",
+              databaseURL: "https://festivalskaorganizacija-default-rtdb.europe-west1.firebasedatabase.app",
+              projectId: "festivalskaorganizacija",
+              storageBucket: "festivalskaorganizacija.appspot.com",
+              messagingSenderId: "887395968774",
+              appId: "1:887395968774:web:df53be77314b48f2e1a087"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+          </script>
+          
+        
+    </head>
+    <body onload="loadorganizer()">
+        <header>
+            <img class="logo" src="img/organizacija-festivala-high-resolution-logo.jpeg" alt="logo">
+            <nav>
+                <ul class="navigacija">
+                    <div id="search-organizators">
+
+                        <input type="text" id="organizators-input" placeholder="Tražite organizatora" maxlength="25" style="background-color: rgb(21, 16, 22); font-family: 'Archivo', sans-serif; color: #c8b1ca;"/>
+                        <button id="organizators-button"  onclick="filter()"><ion-icon name="search-outline"></ion-icon><i class="fas fa-search"></i></button>
+        
+                    </div>
+                    <li><a href="home.html">Početna</a></li>
+                <li><a href="admin.html">Ažuriranje</a></li>
+                    <li><button class="btnLogin-popup">Moj nalog</button></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="wrapper" id="wrapper">
+            <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
+            <div class="formbox login">
+                <p class="prijava" style="font-size: 20px;">Prijava</p>
+                <form action="#">
+                    <div id="loginMessage" class="messageDiv" style="display: none;"></div>
+                    <div class="input-box">
+                        <input type="text" id="username-input-login" required>
+                        <label>Korisničko ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="password-input-login" required>
+                        <label>Šifra</label>
+                    </div>
+                    <button type="submit" class="btn" id="loginClick">Login</button>
+                    <div class="login-register">
+                        <p>Nemate nalog?
+                            <a href="#" class="register-link">Sign up</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="formbox register">
+                <p class="prijava" style="font-size: 20px;">Registracija</p>
+                <form action="#">
+                    <div id="signUpMessage" class="messageDiv" style="display: none;"></div>
+                    <div class="input-box">
+                        <input type="text" id="name" required>
+                        <label>Ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="surname" required>
+                        <label>Prezime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" id="mail" required>
+                        <label>Email</label>
+                        <script>
+                            let inputEmail = document.getElementById("mail");
+                            inputEmail.addEventListener("input", function (event) {
+                                let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    
+                                let value = event.target.value;
+                                if (!regexEmail.test(value)) {
+                                    inputEmail.setCustomValidity("Unesite mail u formatu xxxx@example.com");
+                                } else {
+                                    inputEmail.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="username" required>
+                        <label>Korisničko ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="password" required>
+                        <label>Šifra</label>
+                        <script>
+                            let inputPassword = document.getElementById("password");
+                            inputPassword.addEventListener("input", function (event) {
+                                let value = event.target.value;
+                                if (value.length < 8) {
+                                    inputPassword.setCustomValidity("Šifra se mora sastojati od minimum 8 karaktera!");
+                                } else {
+                                    inputPassword.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="date" id="date" required>
+                        <label>Datum rođenja</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="adress" required>
+                        <label>Adresa</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="tel" id="tell" required>
+                        <label>Telefon</label>
+                        <script>
+                            let inputPhone = document.getElementById("tell");
+                            inputPhone.addEventListener("input", function (event) {
+                                let regexEmail = /^[0-9]+$/;
+                    
+                                let value = event.target.value;
+                                if (!regexEmail.test(value)) {
+                                    inputPhone.setCustomValidity("Telefon sme samo da sadrži brojeve!");
+                                } else {
+                                    inputPhone.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="job" required>
+                        <label>Zanimanje</label>
+                    </div>
+                    <button type="submit" id="submitSignUp" class="btn">Sign up</button>
+                    <div class="login-register">
+                        <p>Već imate nalog?
+                            <a href="#" class="login-link">Login</a>
+                        </p>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+        <div class="prva_pozadina">
+            <h1>Dobrodošli</h1>
+            <h2>Uplovite u svet nezaboravnih događaja!</h2>
+            <h3>Bilo da ste ljubitelj muzike, filma, hrane, umetnosti ili pak nečeg drugog, tu smo da Vam pružimo aranžmane za najaktuelnije događaje.
+                Pridružite se zajednici ljubitelja festivala i uživajte u dobroj atmosferi gde god bili!</h3>
+            <p class="pogledajte">Pogledajte:</p>   
+            <h5>ORGANIZATORI</h5> 
+        </div>
+        <div class="druga_pozadina">
+            <div class="container">
+                <div class="row organizators" id="organizators-container"></div>
+            </div>
+        </div>
+                        
+                        
+         
+
+    </body>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/main.js"></script>
+</html>

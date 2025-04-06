@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS icons-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <title>Upravljanje korisnicima stranice</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wdth,wght@112.5,300&family=Montserrat&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <script type="module" src="js/loginsingup.js">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+              apiKey: "AIzaSyC8ZJg8zdHDPnAsM2CkwErZ_yEStSFyyfg",
+              authDomain: "festivalskaorganizacija.firebaseapp.com",
+              databaseURL: "https://festivalskaorganizacija-default-rtdb.europe-west1.firebasedatabase.app",
+              projectId: "festivalskaorganizacija",
+              storageBucket: "festivalskaorganizacija.appspot.com",
+              messagingSenderId: "887395968774",
+              appId: "1:887395968774:web:df53be77314b48f2e1a087"
+            };
+          
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+          </script>
+        
+        <style>
+            .buttonDiv {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .card-body .fa-trash, .card-body .fa-edit {
+                font-size: 1.2rem;
+                margin: 0.5rem;
+                cursor: pointer;
+            }
+            .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+            .card {
+                background-color: rgb(86, 61, 71);
+                margin: 1rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-body {
+                text-align: center;
+            }
+
+            .card-body .fa-trash, .card-body .fa-edit {
+                font-size: 1.2rem;
+                margin: 0.5rem;
+                cursor: pointer;
+            }
+
+            .buttonDiv {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .card-text {
+                color: rgb(178, 156, 156);
+            }
+            #confirmId {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #ffffff;
+                border: 1px solid #ccc;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                background-color: rgb(86, 61, 71);
+                z-index: 1000;
+            }
+
+            .confirmClass {
+                text-align: center;
+            }
+
+            .buttonsCloseConfirm {
+                margin-top: 20px;
+            }
+
+            .buttonsCloseConfirm span {
+                cursor: pointer;
+                margin-right: 10px;
+            }
+
+            #textConfirm {
+                margin-bottom: 20px;
+            }
+
+
+        </style>
+    </head>
+    <body class="orge-azur" onload="loadUsers()">
+        <header>
+            <img class="logo" src="img/organizacija-festivala-high-resolution-logo.jpeg" alt="logo">
+            <nav>
+                <ul class="navigacija">
+                    <li><a href="home.html">Početna</a></li>
+                <li><a href="admin.html">Ažuriranje</a></li>
+                    <li><button class="btnLogin-popup">Moj nalog</button></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="wrapper" id="wrapper">
+            <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
+            <div class="formbox login">
+                <p class="prijava" style="font-size: 20px;">Prijava</p>
+                <form action="#">
+                    <div id="loginMessage" class="messageDiv" style="display: none;"></div>
+                    <div class="input-box">
+                        <input type="text" id="username-input-login" required>
+                        <label>Korisničko ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="password-input-login" required>
+                        <label>Šifra</label>
+                    </div>
+                    <button type="submit" class="btn" id="loginClick">Login</button>
+                    <div class="login-register">
+                        <p>Nemate nalog?
+                            <a href="#" class="register-link">Sign up</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="formbox register">
+                <p class="prijava" style="font-size: 20px;">Registracija</p>
+                <form action="#">
+                    <div id="signUpMessage" class="messageDiv" style="display: none;"></div>
+                    <div class="input-box">
+                        <input type="text" id="name" required>
+                        <label>Ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="surname" required>
+                        <label>Prezime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" id="mail" required>
+                        <label>Email</label>
+                        <script>
+                            let inputEmail = document.getElementById("mail");
+                            inputEmail.addEventListener("input", function (event) {
+                                let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    
+                                let value = event.target.value;
+                                if (!regexEmail.test(value)) {
+                                    inputEmail.setCustomValidity("Unesite mail u formatu xxxx@example.com");
+                                } else {
+                                    inputEmail.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="username" required>
+                        <label>Korisničko ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="password" required>
+                        <label>Šifra</label>
+                        <script>
+                            let inputPassword = document.getElementById("password");
+                            inputPassword.addEventListener("input", function (event) {
+                                let value = event.target.value;
+                                if (value.length < 8) {
+                                    inputPassword.setCustomValidity("Šifra se mora sastojati od minimum 8 karaktera!");
+                                } else {
+                                    inputPassword.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="date" id="date" required>
+                        <label>Datum rođenja</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="adress" required>
+                        <label>Adresa</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="tel" id="tell" required>
+                        <label>Telefon</label>
+                        <script>
+                            let inputPhone = document.getElementById("tell");
+                            inputPhone.addEventListener("input", function (event) {
+                                let regexEmail = /^[0-9]+$/;
+                    
+                                let value = event.target.value;
+                                if (!regexEmail.test(value)) {
+                                    inputPhone.setCustomValidity("Telefon sme samo da sadrži brojeve!");
+                                } else {
+                                    inputPhone.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="job" required>
+                        <label>Zanimanje</label>
+                    </div>
+                    <button type="submit" id="submitSignUp" class="btn">Sign up</button>
+                    <div class="login-register">
+                        <p>Već imate nalog?
+                            <a href="#" class="login-link">Login</a>
+                        </p>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <div id="confirmId" style="display: none;">
+            <div class="confirmClass">
+                <p id="textConfirm">Da li ste sigurni da želite obirsati ovaj entitet?</p>
+                <div class="buttonsCloseConfirm">
+                    
+                    <span id="confirmbtn" onclick="hideMessage('confirmId')"><i class="fas fa-check-circle"></i></span>
+                    <span class="closebtn" onclick="hideMessage('confirmId')">&times;</span>
+    
+                </div>
+                
+            </div>
+        </div>
+        <div class="containerr">
+            
+            
+            <div class="row festivals" id="users-container"></div>
+
+        </div>
+
+        <div class="container" style="color: antiquewhite;" id="changes">
+            <div class="mb-5">
+                <div class="row">
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="username-input">Korisničko ime</label>
+                        <input type="text" name="username-input" id="username-input" class="form-control" placeholder="Unesite korisničko ime"/>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="password-input">Lozinka</label>
+                        <input type="text" name="password-input" id="password-input" class="form-control" placeholder="Unesite lozinku"/>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="name-input">Ime</label>
+                        <input type="text" name="name-input" id="name-input" class="form-control" placeholder="Unesite ime"/>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="lastname-input">Prezime</label>
+                        <input type="text" name="lastname-input" id="lastname-input" class="form-control" placeholder="Unesite prezime"/>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="email-input">Email</label>
+                        <input type="email" name="email-input" id="email-input" class="form-control" placeholder="Unesite email"/>
+                        <div class="error"></div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="date-input">Datum rođenja</label>
+                        <input type="date"  name="date-input" id="date-input" class="form-control" placeholder="Unesite datum rođenja"/>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="adress-input">Adresa</label>
+                        <input type="text" name="adress-input" id="adress-input" class="form-control" placeholder="Unesite adresu"/>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="phone-input">Telefon</label>
+                        <input type="tel" name="phone-input" id="phone-input" class="form-control" placeholder="Unesite broj telefona">
+                        <div class="error"></div>
+                    </div>
+                    <div class="form-group col-md-6 mb-3">
+                        <label for="job-input">Zanimanje</label>
+                        <input type="text" name="job-input" id="job-input" class="form-control" placeholder="Unesite zanimanje"/>
+                    </div>
+                    <div class="col-lg-12 mt-5">
+                        <button class="btn btn-success" id="save-button">Save</button>
+                    </div>
+                    <div class="message">
+                        <div class="done" id="done">
+                            Uspešno uneti podaci!
+                        </div>
+                        <div class="danger" id="danger">
+                            Sva polja moraju biti popunjena!
+                        </div>
+                        <div class="dangeremail" id="dangeremail">
+                            Email nije unet u dobrom formatu!
+                        </div>
+                        <div class="dangerphone" id="dangerphone">
+                            Telefonski broj se može sastojati samo od cifara!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
+        </div>
+        <script src="admin-korisnici.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    </body>
+</html>

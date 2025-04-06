@@ -1,0 +1,701 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(2, 2, 2);
+}
+
+header {
+    background-color: rgb(2, 2, 2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+}
+
+.logo {
+    background-image: url("../img/organizacija-festivala-high-resolution-logo.jpeg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    height: 12vh;
+    cursor: pointer;
+}
+
+.navigacija {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.navigacija li, .btnLogin-popup {
+    display: inline-block;
+    padding: 0 20px;
+}
+
+.navigacija li a, .btnLogin-popup {
+    font-family: "Archivo", sans-serif;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #e7cbc7;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background-color: black;
+}
+
+.navigacija li a:hover, .btnLogin-popup:hover {
+    color: rgb(170, 150, 169);
+}
+
+.prva_pozadina {
+    background-color: rgb(50, 33, 48);
+    background-image: url("../img/IMG_8645.JPG");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    background-blend-mode: multiply;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10%;
+    background-attachment: fixed;
+}
+
+h1 {
+    font-size: 10vw;
+    font-weight: 300;
+    color: rgb(105, 41, 73);
+    font-family: "Archivo Black", serif;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px #85608b;
+}
+
+h2 {
+    font-size: 2vw;
+    color: rgb(104, 89, 110);
+    font-family: "Archivo", sans-serif;
+    margin-top: 2vh;
+}
+
+h3 {
+    font-size: 1.5vw;
+    color: rgb(67, 57, 71);
+    font-family: "Archivo", sans-serif;
+    font-style: italic;
+    margin-top: 2vh;
+    line-height: 1.5;
+}
+
+.pogledajte, h5 {
+    font-size: 1.7vw;
+    color: rgb(104, 89, 110);
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    margin-top: 3vh;
+}
+
+h5 {
+    font-size: 1.9vw;
+}
+
+.druga_pozadina {
+    background-color: rgb(50, 33, 48);
+    background-image: url("../img/IMG_8643.JPG");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    background-blend-mode: multiply;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.slajd-kontejner {
+    max-width: 1120px;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.slajdovi {
+    overflow: hidden;
+    border-radius: 25px;
+    margin: 0 40px;
+}
+
+.kartica {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 25px;
+    background-color: rgb(104, 89, 110);
+    padding: 20px 14px;
+    margin-bottom: 20px; /* Osigurava razmak između redova */
+}
+.kartica img.slika {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.kartica-kontent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.slika, .kartica-kontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+}
+
+.slika {
+    row-gap: 5px;
+    position: relative;
+    padding: 25px 0;
+}
+
+.overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #1b121d;
+    top: 0;
+    left: 0;
+    border-radius: 25px 25px 0 25px;
+}
+
+.overlay::before, .overlay::after {
+    content: "";
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background-color: #1b121d;
+    bottom: -40px;
+    right: 0;
+}
+
+.overlay::after {
+    border-radius: 0 25px 0 0;
+    background-color: rgb(104, 89, 110);
+}
+
+.slika {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    background: rgb(104, 89, 110);
+    padding: 3px;
+}
+
+.slika {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border: 4px solid #1b121d;
+}
+
+.naziv {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1b121d;
+    font-family: "Archivo", sans-serif;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.godinaOsnivanja {
+    color: #1b121d;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dugme {
+    border: none;
+    font-size: 16px;
+    color: rgb(104, 89, 110);
+    padding: 8px 16px;
+    background-color: #1b121d;
+    border-radius: 6px;
+    margin: 14px auto 0; /* Centrirano dugme i razmak na vrhu */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.dugme:hover {
+    background-color: #402544;
+}
+
+.swiper-navBtn {
+    color: #e7cbc7;
+    transition: color 0.3s ease;
+}
+
+.swiper-navBtn:hover {
+    color: #b18eb6;
+}
+
+.swiper-navBtn::before, .swiper-navBtn::after {
+    font-size: 40px;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-pagination-bullet {
+    background-color: #7e4d86;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    color: #b18eb6;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        height: 8vh;
+    }
+
+    .navigacija {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navigacija li {
+        padding: 8px 0;
+    }
+
+    .prva_pozadina {
+        padding: 0 5%;
+    }
+
+    h1 {
+        font-size: 14vw;
+    }
+
+    h2 {
+        font-size: 4vw;
+    }
+
+    h3 {
+        font-size: 3.5vw;
+    }
+
+    .pogledajte, h5 {
+        font-size: 4.5vw;
+    }
+
+    h5 {
+        font-size: 5vw;
+    }
+
+    .slajdovi {
+        margin: 0 10px;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    header {
+        padding: 10px 4%;
+    }
+
+    .logo {
+        height: 8vh;
+    }
+
+    .navigacija li {
+        padding: 8px 0;
+    }
+
+    .prva_pozadina {
+        padding: 0 5%;
+    }
+
+    h1 {
+        font-size: 16vw;
+    }
+
+    h2 {
+        font-size: 4.5vw;
+    }
+
+    h3 {
+        font-size: 4vw;
+        padding: 5% 0;
+    }
+
+    .pogledajte, h5 {
+        font-size: 5vw;
+        padding-bottom: 5%;
+    }
+
+    h5 {
+        font-size: 5.5vw;
+    }
+
+    .slajdovi {
+        margin: 0 5px;
+    }
+
+    .kartica {
+        padding: 10px;
+    }
+
+    .slika-kartice {
+        height: 100px;
+        width: 100px;
+    }
+
+    .naziv {
+        font-size: 16px;
+        font-weight: 500;
+        color: #1b121d;
+        font-family: "Archivo", sans-serif;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .dugme {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+/* Osnovni stilovi za .informacije */
+.informacije {
+    font-size: 1.2rem; /* ili druga odgovarajuća veličina */
+    color: rgb(104, 89, 110);
+    font-family: 'Archivo', sans-serif;
+    justify-content: center;
+    display: flex;
+    flex-direction: column; /* Promeniti na kolonu */
+    align-items: center;
+    line-height: 1.5;
+}
+
+/* Stilovi za slike */
+.opisne-slike {
+    width: 80%; /* Procenat ili fiksna širina koja odgovara vašem dizajnu */
+    max-width: 400px; /* Maksimalna širina slike */
+    height: auto; /* Automatska visina da zadrži proporcije */
+    margin-top: 3%; /* Razmak između slika */
+    border: 4px solid rgb(104, 89, 110);
+}
+
+
+/* Media queries za različite uređaje */
+@media screen and (max-width: 768px) {
+    .informacije {
+        font-size: 1rem; /* Manja veličina fonta za manje ekrane */
+    }
+    .opisne-slike {
+        width: 90%;
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        height: 8vh;
+    }
+
+    .navigacija {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navigacija li {
+        padding: 8px 0;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .informacije {
+        font-size: 0.8rem; /* Još manja veličina fonta za još manje ekrane */
+    }
+    .opisne-slike {
+        width: 100%;
+    }
+    header {
+        padding: 10px 4%;
+    }
+
+    .logo {
+        height: 8vh;
+    }
+
+    .navigacija li {
+        padding: 8px 0;
+    }
+}
+
+
+.pozadina {
+    background-color: rgb(50, 33, 48);
+    background-image: url("../img/IMG_8643.JPG");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    min-width: 105vw;
+    min-height: 100vh;
+
+}
+
+#Update {
+    display: none;
+}
+.orge-azur {
+    color:rgb(109, 105, 111);
+    background-color: rgb(50, 33, 48);
+    background-image: url("../img/IMG_8643.JPG");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    font-family: "Archivo", sans-serif;
+}
+.message {
+    position: relative;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: left;
+}
+.message .done {
+    font-size: 20px;
+    color:seagreen;
+    animation: buttons .3s linear;
+    display: none;
+    position: absolute;
+}
+.message .danger, .message .dangeremail, .message .dangerphone {
+    font-size: 20px;
+    color:rgb(196, 9, 9);
+    animation: buttons .5s linear;
+    position: absolute;
+    transition: 0.3s;
+    display: none;
+}
+@keyframes buttons {
+    0%{
+        transform: scale(0.1);
+    }
+    50%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 400px;
+    height: 720px;
+    background: transparent;
+    border: 2px solid #7e4d86;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    justify-content: center;
+    align-items: center;
+    transition: transform .5s ease, height .2s ease;
+    overflow: hidden;
+    z-index: 1000; /* Osiguraj da je pop-up iznad ostalih elemenata */
+}
+.wrapper.active-popup {
+    transform: translate(-50%, -50%) scale(1);
+}
+.wrapper .formbox {
+    width: 100%;
+    padding: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform .5s ease;
+}
+.wrapper .formbox.login {
+    transform: translateX(0);
+}
+.wrapper .formbox.register {
+    transform: translateX(400px);
+}
+.wrapper.active .formbox.login {
+    transform: translateX(-400px);
+}
+.wrapper.active .formbox.register {
+    transform: translateX(0);
+}
+.wrapper .icon-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+    font-size: 2rem;
+    color: #482c4d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001; /* Osiguraj da je ikona iznad pop-up-a */
+}
+.prijava {
+    font-size: 2rem;
+    color: #b18eb6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 25px;
+    border-bottom: 2px solid #7e4d86;
+    margin: 30px 0;
+}
+.input-box label {
+    position: absolute;
+    top: -17%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #402544;
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0.5s;
+}
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #7e4d86;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #1b121d;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #e7cbc7;
+    font-weight: 500;
+}
+.login-register {
+    font-size: 0.9rem;
+    color: #402544;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+.login-register p a {
+    color: #6f3655;
+    text-decoration: none;
+    font-weight: 600;
+}
+.login-register p a:hover {
+    text-decoration: underline;
+}
+.messageDiv{
+    background-color: #482c4d;
+    color: #e7cbc7;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 3px;
+    font-size: 2vh;
+    opacity:0 ;
+    animation: fadeOut 5s forwards;
+    font-family: "Archivo", sans-serif;
+}
+#search-organizators,
+#search-festivals {
+    display: flex;
+    margin-right: 15px;
+    margin-top: 10px;
+    height: 33px;
+}
+
+#organizators-button {
+    width: 30px;
+    background-color: rgb(38, 26, 36);
+    color: rgb(249, 199, 236);
+
+}
+.highlight {
+    background-color: rgb(236, 94, 217);
+}
+#festivals-button {
+    border: none;
+    background-color: rgb(232, 34, 34);
+    margin-right: 20px;
+}
+
+#filter {
+    font-size: x-large;
+    color: #c72400;
+}
+
+#search-festivals {
+    height: 130px;
+    width: 100%;
+    background-color: rgb(255, 127, 127);
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+}
+.toggle-search-festivals {
+    background-color: #c72400;
+    color: aqua;
+    size: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

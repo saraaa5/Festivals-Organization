@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Organizacija festivala</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wdth,wght@112.5,300&family=Montserrat&family=Source+Serif+4:ital,opsz@0,8..60;1,8..60&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <meta name="referrer" content="no-referrer"/>
+        <style>
+            body {
+                background-color:black ;
+            }
+            .buttonDiv {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .card-body .fa-trash, .card-body .fa-edit {
+                font-size: 1.2rem;
+                margin: 0.5rem;
+                cursor: pointer;
+            }
+            .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+            .card {
+                background-color: rgb(86, 61, 71);
+                margin: 1rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-body {
+                text-align: center;
+            }
+
+            .card-body .fa-trash, .card-body .fa-edit {
+                font-size: 1.2rem;
+                margin: 0.5rem;
+                cursor: pointer;
+            }
+
+            .buttonDiv {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .card-text {
+                color: rgb(178, 156, 156);
+            }
+            #confirmId {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #ffffff;
+                border: 1px solid #ccc;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                background-color: rgb(86, 61, 71);
+                z-index: 1000;
+            }
+
+            .confirmClass {
+                text-align: center;
+            }
+
+            .buttonsCloseConfirm {
+                margin-top: 20px;
+            }
+
+            .buttonsCloseConfirm span {
+                cursor: pointer;
+                margin-right: 10px;
+            }
+
+            #textConfirm {
+                margin-bottom: 20px;
+            }
+
+
+        </style>
+    </head>
+    <body onload="loadorganizerr()">
+        <header>
+            <img class="logo" src="img/organizacija-festivala-high-resolution-logo.jpeg" alt="logo">
+            <nav>
+                <ul class="navigacija">
+                    
+                    <li><a href="home.html">Početna</a></li>
+                <li><a href="admin.html">Ažuriranje</a></li>
+                    <li><button class="btnLogin-popup">Moj nalog</button></li>
+                </ul>
+            </nav>
+        </header>
+        <ion-icon id="adding" name="add-circle-outline" style="cursor:pointer; color: rgb(25, 113, 38); font-size: 5vw; display: flex; justify-content: center; align-items: center;margin-left: 50%; margin-right: 50%;"></ion-icon>
+        <div class="wrapper">
+            <span class="icon-close"><ion-icon name="close-outline"></ion-icon></span>
+            <div class="formbox login">
+                <p class="prijava">Prijava</p>
+                <form action="#">
+                    <div class="input-box">
+                        <input type="text" required>
+                        <label>Korisničko ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" required>
+                        <label>Šifra</label>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div class="login-register">
+                        <p>Nemate nalog?
+                            <a href="#" class="register-link">Sign up</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="formbox register">
+                <p class="prijava">Registracija</p>
+                <form action="#">
+                    <div class="input-box">
+                        <input type="text" required>
+                        <label>Ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" required>
+                        <label>Prezime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="email" id="mail" required>
+                        <label>Email</label>
+                        <script>
+                            let inputEmail = document.getElementById("mail");
+                            inputEmail.addEventListener("input", function (event) {
+                                let regexEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    
+                                let value = event.target.value;
+                                if (!regexEmail.test(value)) {
+                                    inputEmail.setCustomValidity("Unesite mail u formatu xxxx@example.com");
+                                } else {
+                                    inputEmail.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" required>
+                        <label>Korisničko ime</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="password" required>
+                        <label>Šifra</label>
+                        <script>
+                            let inputPassword = document.getElementById("password");
+                            inputPassword.addEventListener("input", function (event) {
+                                let value = event.target.value;
+                                if (value.length < 8) {
+                                    inputPassword.setCustomValidity("Šifra se mora sastojati od minimum 8 karaktera!");
+                                } else {
+                                    inputPassword.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="date" required>
+                        <label>Datum rođenja</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" required>
+                        <label>Adresa</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="tel" id="tell" required>
+                        <label>Telefon</label>
+                        <script>
+                            let inputPhone = document.getElementById("tell");
+                            inputPhone.addEventListener("input", function (event) {
+                                let regexEmail = /^[0-9]+$/;
+                    
+                                let value = event.target.value;
+                                if (!regexEmail.test(value)) {
+                                    inputPhone.setCustomValidity("Telefon sme samo da sadrži brojeve!");
+                                } else {
+                                    inputPhone.setCustomValidity("");
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" required>
+                        <label>Zanimanje</label>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div class="login-register">
+                        <p>Već imate nalog?
+                            <a href="#" class="login-link">Login</a>
+                        </p>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+
+        <div id="confirmId" style="display: none;">
+            <div class="confirmClass">
+                <p id="textConfirm">Da li ste sigurni da želite obirsati ovaj entitet?</p>
+                <div class="buttonsCloseConfirm">
+                    
+                    <span id="confirmbtn" onclick="hideMessage('confirmId')"><i class="fas fa-check-circle"></i></span>
+                    <span class="closebtn" onclick="hideMessage('confirmId')">&times;</span>
+    
+                </div>
+                
+            </div>
+        </div>
+        <div class="changes" id="class" style="display: none;">
+
+            <section>
+
+                <div class="container" style="color: antiquewhite; background-color: rgba(193, 98, 206, 0.105);" id="changes">
+                    <div class="mb-5">
+                        <div class="row">
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="naziv">Naziv</label>
+                                <input type="text" name="naziv" class="form-control" id="naziv" placeholder="Unesite naziv"/>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="opis">Opis</label>
+                                <input type="text" name="opis" class="form-control" id="opis"/>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="tip">Tip</label>
+                                <input type="text" name="tip" class="form-control" id="tip" />
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="prevoz">Prevoz</label>
+                                <input type="text" name="prevoz" class="form-control" id="prevoz"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="cena">Cena</label>
+                                <input type="number" name="cena" class="form-control" id="cena"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="osobe">Broj osoba</label>
+                                <input type="number" name="osobe" class="form-control" id="osobe"/>
+                                <div class="error"></div>
+                            </div>
+                            <div class="col-lg-12 mt-5">
+                                <button class="btn btn-success" id="save-button">Save</button>
+                            </div>
+                            <div class="message">
+                                <div class="done" id="done">
+                                    Uspešno uneti podaci!
+                                </div>
+                                <div class="danger" id="danger">
+                                    Sva polja moraju biti popunjena!
+                                </div>
+                                <div class="dangeremail" id="dangeremail">
+                                    Email nije unet u dobrom formatu!
+                                </div>
+                                <div class="dangerphone" id="dangerphone">
+                                    Telefonski broj se može sastojati samo od cifara!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                </div>
+            </section>
+        </div>
+        <div class="pozadina">
+            <div id="organizator-info"></div>
+            <div id="festivals-container" class="row"></div>
+        </div>
+        
+                        
+                        
+         
+
+    </body>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="admin-festivali.js"></script>
+</html>
